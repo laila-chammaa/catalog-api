@@ -16,14 +16,28 @@ learned about
 
 ### Setup
 
-run command to start up a mongodb instance in a docker container:
+run to build the .net project
 
-`docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo`
+```
+dotnet build
+dotnet run
+```
 
 run command to start up a mongodb instance in a docker container with authentication:
 
-`docker run -d --rm --name mongodb -p 27017:27017 -v mongodbdata:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=password1 mongo`
+```
+docker run -d --rm --name mongodb -p 27017:27017 -v mongodbdata:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=password1
+```
 
 run command to add the mongodb password to dotnet secrets
 
-`dotnet user-secrets init`
+```
+dotnet user-secrets init
+```
+
+to run in prod:
+
+```
+docker network create net5catalog
+docker run -it --rm -p 8080:80 -e MongoDbSettings:Host=mongo -e MongoDbSettings:Password=password1 --network=net5catalog catalog:v1
+```

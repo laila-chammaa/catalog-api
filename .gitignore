@@ -6,7 +6,6 @@ project.lock.json
 nupkg/
 bin
 obj
-Properties
 
 # Visual Studio Code
 .vscode
